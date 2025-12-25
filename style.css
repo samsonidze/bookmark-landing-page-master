@@ -6,6 +6,8 @@
 
 body {
   font-family: "Rubik", sans-serif;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 header {
@@ -114,7 +116,7 @@ header nav ul li button:hover {
 .main .booking-manager .img-container::after {
   content: "";
   position: absolute;
-  width: 300%;
+  width: 200%;
   height: 70%;
   bottom: 0;
   left: 40%;
@@ -158,9 +160,9 @@ header nav ul li button:hover {
   align-items: center;
   justify-content: center;
   width: 60%;
-  margin: 40px 0;
+  margin: 40px 0 60px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.397);
-  padding-bottom: 5%;
+  padding-bottom: 2.5%;
   position: relative;
 }
 
@@ -191,26 +193,226 @@ header nav ul li button:hover {
   transition: width 0.2s;
   transition: all 0.5s;
 }
+.main .features .slider .slides {
+  width: 90%;
+  max-width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+}
 
 .main .features .slider .slides .oneClick {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 100px;
+  gap: 150px;
+  opacity: 1;
+  animation-name: slideLeft;
+  animation-duration: 1s;
+  position: relative;
+}
+
+.main .features .slider .slides .oneClick::before {
+  position: absolute;
+  content: "";
+  left: -23%;
+  bottom: -10%;
+  width: 75%;
+  height: 80%;
+  border-bottom-right-radius: 164px;
+  background-color: hsl(231, 69%, 60%);
+  z-index: -1;
 }
 
 .main .features .slider .slides .oneClick div {
   width: 40%;
+  text-align: left;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
 }
 
 .main .features .slider .slides .intelligent {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 150px;
+
   opacity: 0;
+  animation-name: slideLeft;
+  animation-duration: 1s;
+  position: relative;
+}
+.main .features .slider .slides .intelligent::before {
+  position: absolute;
+  content: "";
+  left: -23%;
+  bottom: -10%;
+  width: 70%;
+  height: 80%;
+  border-bottom-right-radius: 164px;
+  background-color: hsl(231, 69%, 60%);
+  z-index: -1;
+}
+
+.main .features .slider .slides .intelligent div {
+  width: 40%;
+  text-align: left;
+
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
 }
 
 .main .features .slider .slides .share {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 150px;
+
   opacity: 0;
+  animation-name: slideLeft;
+  animation-duration: 1s;
+  position: relative;
+}
+
+.main .features .slider .slides .share::before {
+  position: absolute;
+  content: "";
+  left: -23%;
+  bottom: -10%;
+  width: 70%;
+  height: 80%;
+  border-bottom-right-radius: 164px;
+  background-color: hsl(231, 69%, 60%);
+  z-index: -1;
+}
+
+.main .features .slider .slides .share div {
+  width: 40%;
+  display: flex;
+  text-align: left;
+
+  gap: 20px;
+  flex-direction: column;
+}
+
+.main .features .slider .slides p {
+  color: grey;
+  font-size: 18px;
+}
+
+.main .features .slider .slides button {
+  background-color: hsl(231, 69%, 60%);
+  width: fit-content;
+  border: 0;
+  font-size: 17px;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  border: 2px solid hsl(231, 69%, 60%);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.main .features .slider .slides button:hover {
+  background-color: white;
+  color: hsl(231, 69%, 60%);
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+.main .features .extensions {
+  margin-top: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main .features .extensions p {
+  margin: 30px;
+  width: 50%;
+  text-align: center;
+  color: grey;
+  font-size: 18px;
+}
+
+.main .features .extensions .browsers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  /* margin: 40px; */
+}
+
+.main .features .extensions .browsers img{
+  margin-top: 30px;
+}
+
+.main .features .extensions .browsers h1{
+  font-size: 22px;
+}
+
+.main .features .extensions .browsers h3{
+  font-size: 16px;
+  font-weight: 400;
+  color: grey;
+}
+.main .features .extensions .browsers .chrome,
+.fireFox,
+.opera {
+  box-shadow: 0 16px 16px 0 #e7e7e7;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.main .features .extensions .browsers .fireFox{
+  margin-top:50px;
+}
+.main .features .extensions .browsers .opera{
+  margin-top: 150px;
+}
+
+.main .features .extensions .browsers button {
+  border: 0;
+  color: white;
+  padding: 15px 30px;
+  background-color: hsl(231, 69%, 60%);
+  border-radius: 5px;
+  font-size: 15px;
+  border: 2px solid hsl(231, 69%, 60%);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.main .features .extensions .browsers button:hover {
+  color: hsl(231, 69%, 60%);
+  background-color: white;
+}
+
+.main .features .extensions .browsers .button-container {
+  width: 100%;
+  padding: 30px 40px;
+  border-top: 4px dotted rgba(128, 128, 128, 0.411);
+  margin-top: 30px;
+
+}
+
+.main .features .extensions .browsers .button-container::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  bo
 }
