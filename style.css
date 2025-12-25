@@ -15,6 +15,25 @@ header {
   align-items: center;
   justify-content: space-around;
   padding: 50px 10px;
+  position: relative;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: hsl(229, 31%, 21%);
+  margin: 3px 0;
+  transition: 0.3s;
 }
 
 header nav ul {
@@ -44,6 +63,115 @@ header nav ul li button:hover {
   color: hsl(0, 94%, 66%);
   background-color: white;
   border: 2px solid hsl(0, 94%, 66%);
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(37, 43, 70, 0.95);
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  padding: 40px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu.active {
+  display: flex;
+  opacity: 1;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.bookmark-logo-mobile {
+  filter: brightness(0) invert(1);
+}
+
+.close-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.mobile-nav {
+  flex: 1;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobile-nav ul li {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 20px 0;
+  text-align: center;
+}
+
+.mobile-nav ul li:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 30px 0;
+}
+
+.mobile-nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.mobile-nav ul li a:hover {
+  color: hsl(0, 94%, 66%);
+}
+
+.mobile-login-btn {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mobile-login-btn:hover {
+  background: white;
+  color: hsl(229, 31%, 21%);
+}
+
+.mobile-social {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.mobile-social img {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.mobile-social img:hover {
+  opacity: 0.7;
 }
 
 .main .booking-manager {
@@ -134,6 +262,8 @@ header nav ul li button:hover {
   flex-direction: column;
   text-align: center;
   gap: 20px;
+  /* Added padding to prevent content from touching edges */
+  padding: 0 20px;
 }
 .main .features h1 {
   letter-spacing: 2px;
@@ -153,6 +283,8 @@ header nav ul li button:hover {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  /* Ensure slider takes full width on mobile */
+  width: 100%;
 }
 
 .main .features .slider .options {
@@ -200,6 +332,8 @@ header nav ul li button:hover {
   align-items: center;
   justify-content: center;
   margin-bottom: 100px;
+  /* Add overflow hidden to prevent content from breaking layout */
+  overflow: hidden;
 }
 
 .main .features .slider .slides .oneClick {
@@ -218,7 +352,7 @@ header nav ul li button:hover {
   content: "";
   left: -23%;
   bottom: -10%;
-  width: 75%;
+  width: 70%;
   height: 80%;
   border-bottom-right-radius: 164px;
   background-color: hsl(231, 69%, 60%);
@@ -243,6 +377,7 @@ header nav ul li button:hover {
   animation-name: slideLeft;
   animation-duration: 1s;
   position: relative;
+  display: none;
 }
 .main .features .slider .slides .intelligent::before {
   position: absolute;
@@ -275,6 +410,7 @@ header nav ul li button:hover {
   animation-name: slideLeft;
   animation-duration: 1s;
   position: relative;
+  display: none;
 }
 
 .main .features .slider .slides .share::before {
@@ -321,6 +457,12 @@ header nav ul li button:hover {
   color: hsl(231, 69%, 60%);
 }
 
+/* Add max-width to slide images to prevent overflow */
+.main .features .slider .slides img {
+  max-width: 100%;
+  height: auto;
+}
+
 @keyframes slideLeft {
   from {
     transform: translateX(200%);
@@ -349,18 +491,19 @@ header nav ul li button:hover {
   align-items: center;
   justify-content: center;
   gap: 40px;
-  /* margin: 40px; */
+  /* Add flex-wrap to prevent overflow on smaller screens */
+  flex-wrap: wrap;
 }
 
-.main .features .extensions .browsers img{
+.main .features .extensions .browsers img {
   margin-top: 30px;
 }
 
-.main .features .extensions .browsers h1{
+.main .features .extensions .browsers h1 {
   font-size: 22px;
 }
 
-.main .features .extensions .browsers h3{
+.main .features .extensions .browsers h3 {
   font-size: 16px;
   font-weight: 400;
   color: grey;
@@ -376,12 +519,14 @@ header nav ul li button:hover {
   gap: 20px;
   flex-direction: column;
   border-radius: 10px;
+  /* Added min-width to prevent cards from getting too small */
+  min-width: 250px;
 }
 
-.main .features .extensions .browsers .fireFox{
-  margin-top:50px;
+.main .features .extensions .browsers .fireFox {
+  margin-top: 50px;
 }
-.main .features .extensions .browsers .opera{
+.main .features .extensions .browsers .opera {
   margin-top: 150px;
 }
 
@@ -407,12 +552,500 @@ header nav ul li button:hover {
   padding: 30px 40px;
   border-top: 4px dotted rgba(128, 128, 128, 0.411);
   margin-top: 30px;
-
 }
 
 .main .features .extensions .browsers .button-container::before {
   position: absolute;
   content: "";
   width: 100%;
-  bo
+}
+
+.main .faq {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.main .faq h1 {
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.main .faq h4 {
+  color: rgba(128, 128, 128, 0.685);
+  font-weight: 400;
+  margin: 20px 0;
+  font-size: 20px;
+}
+
+.main .faq .questions {
+  width: 40%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: left;
+}
+
+/* first */
+.main .faq .questions .first div {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+.main .faq .questions .first div img {
+  margin: auto 0;
+  height: 13px;
+}
+.main .faq .questions .first div h2 {
+  font-weight: 500;
+}
+.main .faq .questions .first {
+  margin: 20px 0;
+  border: 1px solid black;
+  border-left: 0;
+  border-right: 0;
+  padding: 20px 0;
+  cursor: pointer;
+}
+.main .faq .questions .first p {
+  display: none;
+}
+
+.main .faq .questions .first div:hover {
+  color: hsl(0, 94%, 66%);
+  transition: 0.1s;
+}
+
+/* second */
+
+.main .faq .questions .second div {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+.main .faq .questions .second div img {
+  margin: auto 0;
+  height: 13px;
+}
+.main .faq .questions .second div h2 {
+  font-weight: 500;
+}
+.main .faq .questions .second {
+  margin: 20px 0;
+  border: 1px solid black;
+  border-left: 0;
+  border-right: 0;
+  padding: 20px 0;
+  cursor: pointer;
+  border-top: 0;
+  padding-top: 0;
+}
+.main .faq .questions .second p {
+  display: none;
+}
+
+.main .faq .questions .second div:hover {
+  color: hsl(0, 94%, 66%);
+  transition: 0.1s;
+}
+/* third */
+
+.main .faq .questions .third div {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+.main .faq .questions .third div img {
+  height: 13px;
+  margin: auto 0;
+}
+.main .faq .questions .third div h2 {
+  font-weight: 500;
+}
+.main .faq .questions .third {
+  margin: 20px 0;
+  border: 1px solid black;
+  border-left: 0;
+  border-right: 0;
+  padding: 20px 0;
+  cursor: pointer;
+  border-top: 0;
+  padding-top: 0;
+}
+.main .faq .questions .third p {
+  display: none;
+}
+.main .faq .questions .third div:hover {
+  color: hsl(0, 94%, 66%);
+  transition: 0.1s;
+}
+
+/* forth */
+
+.main .faq .questions .forth div {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+.main .faq .questions .forth div img {
+  margin: auto 0;
+  height: 13px;
+}
+.main .faq .questions .forth div h2 {
+  font-weight: 500;
+}
+.main .faq .questions .forth {
+  margin: 20px 0;
+  border: 1px solid black;
+  border-left: 0;
+  border-right: 0;
+
+  padding: 20px 0;
+  border-top: 0;
+  padding-top: 0;
+  cursor: pointer;
+}
+
+.main .faq .questions .forth div:hover {
+  color: hsl(0, 94%, 66%);
+  transition: 0.1s;
+}
+
+.faq .more-info {
+  border: 0;
+  color: white;
+  background-color: hsl(231, 69%, 60%);
+  border: 2px solid hsl(231, 69%, 60%);
+  padding: 10px;
+  border-radius: 5px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.faq .more-info:hover {
+  background-color: white;
+  color: hsl(231, 69%, 60%);
+}
+
+/* paragramphs */
+
+#firstP,
+#secondP,
+#thirdP,
+#forthP {
+  max-height: 0;
+  display: block;
+  opacity: 0;
+  margin-top: 15px;
+  color: rgba(128, 128, 128, 0.678);
+  transition: all 0.5s;
+}
+
+/* contact us */
+
+.main .contact-us {
+  width: 100%;
+  height: 250px;
+  background-color: hsl(231, 69%, 60%);
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  justify-content: center;
+  flex-direction: column;
+  gap: 25px;
+  color: white;
+}
+
+.main .contact-us form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.main .contact-us p {
+  letter-spacing: 5px;
+}
+.main .contact-us h1 {
+  font-weight: 400;
+  font-size: 38px;
+}
+.main .contact-us form input:focus {
+  outline: 0;
+}
+.main .contact-us form input {
+  padding: 5px 10px;
+  width: 250px;
+  height: 100%;
+  border-radius: 2px;
+  border: 0;
+  position: relative;
+}
+
+.main .contact-us form .close-div {
+  height: 100%;
+  position: relative;
+}
+
+.main .contact-us form input::before {
+  content: "";
+}
+.close-img {
+  background-color: hsl(0, 94%, 66%);
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 2%;
+  top: 20%;
+}
+.main .contact-us form button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
+  background-color: hsl(0, 94%, 66%);
+  border: 2px solid hsl(0, 94%, 66%);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.main .contact-us form button:hover {
+  background-color: white;
+  color: hsl(0, 94%, 66%);
+}
+
+/* footer */
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: hsl(229, 31%, 21%);
+  padding: 10px 30px;
+}
+
+footer .left {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+footer .left ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  list-style: none;
+}
+
+footer .icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  header {
+    padding: 30px 20px;
+  }
+
+  header > nav {
+    display: none;
+  }
+
+  .main .booking-manager {
+    flex-direction: column-reverse;
+    margin: 50px 20px;
+    gap: 30px;
+  }
+
+  .main .booking-manager .left {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .main .booking-manager .left h2 {
+    font-size: 32px;
+  }
+
+  .main .booking-manager .left .btns {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .main .booking-manager .img-container {
+    width: 100%;
+  }
+
+  .main .booking-manager .img-container::after {
+    width: 100%;
+    left: 20%;
+    border-bottom-left-radius: 100px;
+  }
+
+  /* Fixed features section for mobile responsiveness */
+  .main .features {
+    padding: 0 10px;
+  }
+
+  .main .features .description {
+    max-width: 90%;
+    padding: 0 20px;
+  }
+
+  .main .features .slider {
+    width: 100%;
+  }
+
+  .main .features .slider .options {
+    width: 100%;
+    flex-direction: column;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin: 20px 0 40px;
+  }
+
+  .main .features .slider .options h2 {
+    width: 100%;
+    border-top: 1px solid rgba(128, 128, 128, 0.397);
+    padding: 20px 0;
+    font-size: 16px;
+  }
+
+  /* Fixed line indicator for mobile - hide it since tabs are stacked */
+  .main .features .slider .options .line {
+    display: none;
+  }
+
+  .main .features .slider .slides {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  /* Fixed slide layouts to prevent overlapping */
+  .main .features .slider .slides .oneClick,
+  .main .features .slider .slides .intelligent,
+  .main .features .slider .slides .share {
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .main .features .slider .slides .oneClick div,
+  .main .features .slider .slides .intelligent div,
+  .main .features .slider .slides .share div {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Hide decorative background on mobile to prevent overflow */
+  .main .features .slider .slides .oneClick::before,
+  .main .features .slider .slides .intelligent::before,
+  .main .features .slider .slides .share::before {
+    display: none;
+  }
+
+  /* Adjust image sizing for mobile */
+  .main .features .slider .slides img {
+    max-width: 80%;
+    height: auto;
+  }
+
+  .main .features .slider .slides p {
+    font-size: 16px;
+  }
+
+  .main .features .slider .slides button {
+    display: none;
+  }
+
+  .main .features .extensions p {
+    width: 90%;
+  }
+
+  /* Fixed browser extension cards layout */
+  .main .features .extensions .browsers {
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .main .features .extensions .browsers .chrome,
+  .main .features .extensions .browsers .fireFox,
+  .main .features .extensions .browsers .opera {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .main .features .extensions .browsers .fireFox,
+  .main .features .extensions .browsers .opera {
+    margin-top: 0;
+  }
+
+  .main .faq {
+    padding: 0 20px;
+  }
+
+  .main .faq .questions {
+    width: 100%;
+    padding: 0;
+  }
+
+  .main .faq h1 {
+    padding: 0 10px;
+  }
+
+  .main .faq h4 {
+    padding: 0 10px;
+  }
+
+  .main .contact-us {
+    padding: 40px 20px;
+    height: auto;
+  }
+
+  .main .contact-us h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .main .contact-us form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .main .contact-us form input {
+    width: 100%;
+  }
+
+  .main .contact-us form .close-div {
+    width: 100%;
+  }
+
+  .main .contact-us form button {
+    width: 100%;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px 20px;
+  }
+
+  footer .left {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  footer .left ul {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
