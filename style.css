@@ -789,14 +789,21 @@ header nav ul li button:hover {
 .main .contact-us form input::before {
   content: "";
 }
+
+.img-cont{
+  width: 10%;
+  height: 100%;
+  position: absolute;
+  right: 2%;
+  top: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .close-img {
   background-color: hsl(0, 94%, 66%);
   border-radius: 100%;
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  right: 2%;
-  top: 20%;
+  
 }
 .main .contact-us form button {
   padding: 10px 15px;
